@@ -24,21 +24,17 @@ default: &default
 development:
   <<: *default
   database: QuoraClone_development
-  username: <%= ENV['QUORACLONE_DATABASE_USERNAME'] %>
-  password: <%= ENV['QUORACLONE_DATABASE_PASSWORD'] %>
-  host: localhost
-  port: 5432  
+  username: <%= Rails.application.credentials.database[:username] %>
+  password: <%= Rails.application.credentials.database[:password] %> 
 
 test:
   <<: *default
   database: QuoraClone_test
-  username: <%= ENV['QUORACLONE_DATABASE_USERNAME'] %>
-  password: <%= ENV['QUORACLONE_DATABASE_PASSWORD'] %>
-  host: localhost
-  port: 5432  
+  username: <%= Rails.application.credentials.database[:username] %>
+  password: <%= Rails.application.credentials.database[:password] %>
 
 production:
   <<: *default
   database: QuoraClone_production
-  username: QuoraClone
-  password: <%= ENV['QUORACLONE_DATABASE_PASSWORD'] %>
+  # username: QuoraClone
+  # password: <%= ENV['QUORACLONE_DATABASE_PASSWORD'] %>
