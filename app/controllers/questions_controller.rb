@@ -1,7 +1,8 @@
-class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[ show edit update destroy ]
-  before_action :check_unauthorization, only: %i[ edit update destroy ]
+# frozen_string_literal: true
 
+class QuestionsController < ApplicationController
+  before_action :set_question, only: %i[show edit update destroy]
+  before_action :check_unauthorization, only: %i[edit update destroy]
 
   # GET /questions or /questions.json
   def index
@@ -9,8 +10,7 @@ class QuestionsController < ApplicationController
   end
 
   # GET /questions/1 or /questions/1.json
-  def show
-  end
+  def show; end
 
   # GET /questions/new
   def new
@@ -18,8 +18,7 @@ class QuestionsController < ApplicationController
   end
 
   # GET /questions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /questions or /questions.json
   def create
@@ -27,7 +26,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to question_url(@question), notice: "Question was successfully created." }
+        format.html { redirect_to question_url(@question), notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +39,7 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to question_url(@question), notice: "Question was successfully updated." }
+        format.html { redirect_to question_url(@question), notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,25 +53,26 @@ class QuestionsController < ApplicationController
     @question.destroy
 
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: "Question was successfully destroyed." }
+      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_question
-      @question = Question.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def question_params
-      params.require(:question).permit(:title, :body)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_question
+    @question = Question.find(params[:id])
+  end
 
-    def check_unauthorization
-      unless @question.user === current_user 
-        redirect_to authenticated_root_path, alert: "You are not authorized to access this post."
-      end
-    end
+  # Only allow a list of trusted parameters through.
+  def question_params
+    params.require(:question).permit(:title, :body)
+  end
+
+  def check_unauthorization
+    return if @question.user.eql(current_user)
+
+    redirect_to authenticated_root_path, alert: 'You are not authorized to access this post.'
+  end
 end
