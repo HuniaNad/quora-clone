@@ -61,13 +61,15 @@ class QuestionsController < ApplicationController
   def like
     @question = Question.find(params[:id])
     @question.likes.create(user: current_user, is_liked: true)
+    @question.update(likes_count: @question.likes.where(is_liked: true).count)
     render json: { likes_count: @question.likes_count }
   end
 
   def dislike
     @question = Question.find(params[:id])
     @question.likes.create(user: current_user, is_liked: false)
-    render json: { likes_count: @question.likes_count }
+    @question.update(dislikes_count: @question.likes.where(is_liked: false).count)
+    render json: { dislikes_count: @question.dislikes_count }
   end
 
   private
