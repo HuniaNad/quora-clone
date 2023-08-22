@@ -2,6 +2,7 @@
 
 class Question < ApplicationRecord
   belongs_to :user
+  has_many :likes, as: :likable 
   validates :title, presence: true
   validates :body, presence: true
 end
