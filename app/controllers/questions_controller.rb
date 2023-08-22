@@ -71,7 +71,7 @@ class QuestionsController < ApplicationController
   end
 
   def check_unauthorization
-    return if @question.user.eql(current_user)
+    return if @question.user.eql?(current_user)
 
     redirect_to authenticated_root_path, alert: 'You are not authorized to access this post.'
   end
