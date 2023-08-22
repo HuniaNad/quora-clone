@@ -1,0 +1,33 @@
+
+<h1>Questions</h1>
+
+<%= link_to 'New Question', new_question_path %>
+
+<% @questions.each do |question| %>
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= question.title.titlecase%>
+              </h5>
+              <p class="card-text">
+                <%= truncate(question.body.capitalize, length: 140) %>
+              </p>
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-between">
+              <p>Asked by <%= question.user.name %></p>
+              <%= link_to question do %>
+                <i class="material-icons">visibility</i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+<% end %>
+
+<br>
+
+
