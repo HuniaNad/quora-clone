@@ -1,5 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[ show edit update destroy ]
+  before_action :check_unauthorization, only: %i[ edit update destroy ]
+
 
   # GET /questions or /questions.json
   def index
@@ -66,5 +68,11 @@ class QuestionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def question_params
       params.require(:question).permit(:title, :body)
+    end
+
+    def check_unauthorization
+      unless @question.user === current_user 
+        redirect_to authenticated_root_path, alert: "You are not authorized to access this post."
+      end
     end
 end
