@@ -17,7 +17,9 @@
               </p>
             </div>
             <div class="card-footer text-muted d-flex justify-content-between">
-              <p>Asked by <%= question.user.name %></p>
+              <span>Asked by 
+                <%= link_to question.user.name, profile_path(question.user_id) %>
+              </span>
               <%= link_to question do %>
                 <i class="material-icons">visibility</i>
               <% end %>
