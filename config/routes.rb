@@ -13,5 +13,10 @@ Rails.application.routes.draw do
   end
 
   get 'public/index'
-  resources :questions
+  resources :questions do
+    member do 
+      post 'like'
+      post 'dislike'
+    end
+  end
 end
