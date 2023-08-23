@@ -6,7 +6,6 @@ $(document).on 'click', '.vote-button', ->
     
     if voteType == 'upvote' and downvoteBtn.hasAttribute('enabled')
       # Code for handling upvote with downvote already enabled
-      console.log(1)
       downvoteBtn.removeAttribute('enabled')
       upvoteBtn.setAttribute('enabled', '')
       $.ajax
@@ -18,7 +17,6 @@ $(document).on 'click', '.vote-button', ->
  
     else if voteType == 'downvote' and upvoteBtn.hasAttribute('enabled')
       # Code for handling downvote with upvote already enabled
-      console.log(1)
       upvoteBtn.removeAttribute('enabled')
       downvoteBtn.setAttribute('enabled', '')
       $.ajax
@@ -28,9 +26,7 @@ $(document).on 'click', '.vote-button', ->
         success: (response) ->
             $('.likes-count-' + questionId).text(response.upvotes_count)
     else
-      console.log(3)
       this.toggleAttribute('enabled')
-      console.log(this)
       $.ajax
         type: 'POST'
         url: "/votes/#{questionId}/#{voteType}"
