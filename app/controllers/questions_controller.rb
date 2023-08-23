@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions or /questions.json
   def index
-    @questions = Question.includes(:user).all.order(upvotes_count: :DESC)
+    @questions = Question.includes(:user, :answers).all.order(upvotes_count: :DESC)
   end
 
   # GET /questions/1 or /questions/1.json
@@ -56,20 +56,6 @@ class QuestionsController < ApplicationController
       format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def like
-    @question = Question.find(params[:id])
-    @question.likes.create(user: current_user, is_liked: true)
-    @question.update(likes_count: @question.likes.where(is_liked: true).count)
-    render json: { likes_count: @question.likes_count }
-  end
-
-  def dislike
-    @question = Question.find(params[:id])
-    @question.likes.create(user: current_user, is_liked: false)
-    @question.update(dislikes_count: @question.likes.where(is_liked: false).count)
-    render json: { dislikes_count: @question.dislikes_count }
   end
 
   private
