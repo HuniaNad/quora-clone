@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   end
 
   get 'public/index'
-  resources :questions
+  resources :questions do
+    resources :answers
+  end
   resources :votes, only: [] do
     member do
       post 'upvote'
