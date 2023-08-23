@@ -8,4 +8,6 @@ class User < ApplicationRecord
 
   has_one_attached :image
   has_many :questions, dependent: :destroy
+  has_many :upvotes, dependent: :destroy
+  has_many :downvotes, dependent: :destroy
 end
