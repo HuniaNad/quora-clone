@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions or /questions.json
   def index
-    @questions = Question.includes(:user).all.order(likes_count: :DESC)
+    @questions = Question.includes(:user).all.order(upvotes_count: :DESC)
   end
 
   # GET /questions/1 or /questions/1.json

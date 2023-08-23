@@ -13,10 +13,13 @@ Rails.application.routes.draw do
   end
 
   get 'public/index'
-  resources :questions do
+  resources :questions
+  resources :votes, only: [] do
     member do
-      post 'like'
-      post 'dislike'
+      post 'upvote'
+      post 'downvote'
+      post 'upvote_inc_downvote_dec'
+      post 'upvote_dec_downvote_inc'
     end
   end
 end
