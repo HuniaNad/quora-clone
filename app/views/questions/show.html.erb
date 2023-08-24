@@ -48,15 +48,19 @@
         </div>
       </div>
 
-      <div class="mt-4">
-        <h4>Your Answer</h4>
-        <%= render 'answers/form' %>
+      <div class="d-flex flex-column-reverse">
+        <div class="mt-4">
+          <h4>Answers</h4>
+          <%= render @question.answers %>
+        </div>
+        
+        <div class="mt-4">
+          <h4>Your Answer</h4>
+          <%= render 'answers/form' %>
+        </div>
       </div>
 
-      <div class="mt-4">
-        <h4>Answers</h4>
-        <%= render @question.answers %>
-      </div>
+      
     </div>
   </div>
 </div>  

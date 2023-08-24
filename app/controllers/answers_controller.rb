@@ -1,8 +1,4 @@
-class AnswersController < ApplicationController
-    def index
-        @answers = Answer.includes(:user).all
-    end
-    
+class AnswersController < ApplicationController       
     def create
         @question = Question.find(params[:question_id])
         @answer = @question.answers.build(answer_params)
@@ -15,13 +11,17 @@ class AnswersController < ApplicationController
         end
     end
 
-    # def destroy 
-    #     @post = Post.find(params[:post_id])
-    #     @comment = @post.comments.find(params[:id])
-    #     @comment.destroy
+    def destroy 
+        puts "------------->", params.inspect
+        @question = Question.find(params[:question_id])
+        @answer = @question.answers.find(params[:id])
 
-    #     redirect_to post_path(@post)
-    # end
+        if @answer.destroy
+            redirect_to @question, notice: 'Answer was successfully created.'
+        else
+            render 'questions/show', status: :unprocessable_entity
+        end
+    end
 
     private
 
