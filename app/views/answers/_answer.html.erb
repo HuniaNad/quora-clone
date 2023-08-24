@@ -1,18 +1,5 @@
 <div class="card mt-4">
   <div class="card-body">
-    <div class="media">
-      <% if answer.user.image.attached? %>
-        <%= image_tag(answer.user.image, class: "mr-3 rounded-circle") %>
-      <% else %>
-        <span class="material-icons md-48">
-        account_circle
-        </span>
-      <% end %>
-      <div class="media-body">
-        <h5 class="mt-0"><%= answer.user.name %></h5>
-        <p><%= answer.created_at.strftime('%B %d, %Y') %></p>
-      </div>
-    </div>
     <div class="mt-3">
       <%= answer.body %>
     </div>
