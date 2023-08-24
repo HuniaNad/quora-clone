@@ -16,12 +16,30 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers
   end
-  resources :votes, only: [] do
+
+  resources :questions, only: [] do
     member do
-      post 'upvote'
-      post 'downvote'
-      post 'upvote_inc_downvote_dec'
-      post 'upvote_dec_downvote_inc'
+      post :upvote, to: 'votes#upvote', type: 'Question'
+      post :downvote, to: 'votes#downvote', type: 'Question'
+      post :upvote_inc_downvote_dec, to: 'votes#upvote_inc_downvote_dec', type: 'Question'
+      post :upvote_dec_downvote_inc, to: 'votes#upvote_dec_downvote_inc', type: 'Question'
     end
   end
+  resources :answers, only: [] do
+    member do
+      post :upvote, to: 'votes#upvote', type: 'Answer'
+      post :downvote, to: 'votes#downvote', type: 'Answer'
+      post :upvote_inc_downvote_dec, to: 'votes#upvote_inc_downvote_dec', type: 'Answer'
+      post :upvote_dec_downvote_inc, to: 'votes#upvote_dec_downvote_inc', type: 'Answer'
+    end
+  end
+  
+  # resources :votes, only: [] do
+  #   member do
+  #     post 'upvote'
+  #     post 'downvote'
+  #     post 'upvote_inc_downvote_dec'
+  #     post 'upvote_dec_downvote_inc'
+  #   end
+  # end
 end

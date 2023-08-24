@@ -25,7 +25,8 @@
                   <%= link_to question do %>
                     <i class="material-icons">visibility</i>
                   <% end %>
-                  <%= render partial: 'voting', locals: { question: question } %>
+                  <%= render partial: 'voting', locals: { entity: question } %>
+
                 </div>
                 
               </div>
