@@ -6,7 +6,7 @@
         <% if current_user %>
           <li class="nav-item"> 
             <%= link_to edit_user_registration_path do %>
-              <% if current_user.image.attached? %>
+              <% if current_user&.image.attached? %>
                 <%= image_tag(current_user.image, style: 'height: 50px; width: 50px; display: inline-block; border-radius: 50%;
                 object-fit: cover;') %>
               <% else %>

@@ -19,7 +19,7 @@
 
       <div class="d-flex justify-content-between mt-3">
         <div>
-          <% if answer.user === current_user %>
+          <% if policy(answer).destroy? %>
             <%= link_to 'Delete', [answer.question, answer], method: :delete, data: { confirm: "Are you sure you want to delete this answer?" } %>
           <% end %> 
           

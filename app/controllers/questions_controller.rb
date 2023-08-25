@@ -74,8 +74,6 @@ class QuestionsController < ApplicationController
 
   # Check if user is authorized to access the question
   def authorize_access
-    return if @question.user.eql?(current_user)
-
-    redirect_to authenticated_root_path, alert: 'You are not authorized to access this question.'
+    authorize @question
   end
 end

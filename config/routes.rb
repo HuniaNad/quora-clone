@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get 'public/index'
   resources :questions do
-    resources :answers
+    resources :answers, except: %i[edit update show]
   end
 
   resources :questions, only: [] do

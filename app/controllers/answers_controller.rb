@@ -12,6 +12,7 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.build(answer_params)
     @answer.user = current_user
+    authorize @answer
 
     if @answer.save
       redirect_to @question, notice: 'Answer was successfully created.'
@@ -22,6 +23,8 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer ||= @question.answers.find_by(id: params[:id])
+    authorize @answer
+
     if @answer.destroy
       redirect_to @question, notice: 'Answer was successfully deleted.'
     else
