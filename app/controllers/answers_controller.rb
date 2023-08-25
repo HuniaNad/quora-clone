@@ -1,4 +1,12 @@
-class AnswersController < ApplicationController       
+class AnswersController < ApplicationController   
+
+    def index 
+        @question = Question.find(params[:question_id])
+        @top_answers = @question.answers.order(upvotes_count: :DESC).limit(2)
+
+        render json: @top_answers
+    end
+    
     def create
         @question = Question.find(params[:question_id])
         @answer = @question.answers.build(answer_params)
