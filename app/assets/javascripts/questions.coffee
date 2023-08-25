@@ -29,8 +29,8 @@ answerContainerStyling = (answersContainer) ->
     answersContainer.classList.add('w-100')
 
 generateAnswerBody = (el, answerContent, answerLikes, answer) ->
-    answerBody.append("#{answer.body}")
+    answerContent.append("#{answer.body}")
     answerLikes.classList.add('text-muted')
     answerLikes.append("Upvotes: #{answer.upvotes_count}")
-    el.append(answerBody)
+    el.append(answerContent)
     el.append(answerLikes)
