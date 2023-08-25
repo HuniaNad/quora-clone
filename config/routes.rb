@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       post :upvote_dec_downvote_inc, to: 'votes#upvote_dec_downvote_inc', type: 'Question'
     end
   end
+
   resources :answers, only: [] do
     member do
       post :upvote, to: 'votes#upvote', type: 'Answer'
@@ -33,13 +34,4 @@ Rails.application.routes.draw do
       post :upvote_dec_downvote_inc, to: 'votes#upvote_dec_downvote_inc', type: 'Answer'
     end
   end
-  
-  # resources :votes, only: [] do
-  #   member do
-  #     post 'upvote'
-  #     post 'downvote'
-  #     post 'upvote_inc_downvote_dec'
-  #     post 'upvote_dec_downvote_inc'
-  #   end
-  # end
 end
