@@ -1,5 +1,5 @@
 
-<% if @question.user === current_user %>
+<% if policy(@question).update? %>
   <%= link_to 'Edit', edit_question_path(@question) %> |
   <%= link_to 'Delete', question_path(@question), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %> |
 <% end %> 
@@ -8,6 +8,7 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-8 offset-md-2">
+      
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">
@@ -22,30 +23,24 @@
             <%= link_to @question.user.name, profile_path(@question.user_id) %>
           </span>
 
-          <div class="btn-group question-vote-buttons">
-            <button 
-              id="btn-upvote"
-              class="btn btn-primary btn-sm vote-button" 
-              data-vote="upvote" 
-              data-q-id="<%= @question.id %>" 
-              <%= "enabled" if @question.upvotes.pluck(:user_id).include? current_user.id %>
-            >
-              <span class="material-icons">thumb_up</span> Upvote &#8226; 
-              <span class="likes-count-<%= @question.id %>"> <%= @question.upvotes_count %> </span>
-            </button>
+          <%= render partial: 'voting', locals: { entity: @question } %>
 
-            <button 
-              id="btn-downvote"
-              class="btn btn-danger btn-sm vote-button" 
-              data-vote="downvote" 
-              data-q-id="<%= @question.id %>"
-              <%= "enabled" if @question.downvotes.pluck(:user_id).include? current_user.id %>
-            >
-              <span class="material-icons">thumb_down</span>
-            </button>
-          </div>
         </div>
       </div>
+
+      <div class="d-flex flex-column-reverse">
+        <div class="mt-4">
+          <h4>Answers</h4>
+          <%= render partial: 'answers/answer', collection: @popular_answers %>
+        </div>
+        
+        <div class="mt-4">
+          <h4>Your Answer</h4>
+          <%= render partial: 'answers/form', locals: { question: @question } %>
+        </div>
+      </div>
+
+      
     </div>
   </div>
 </div>  

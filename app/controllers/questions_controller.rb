@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[show edit update destroy]
-  before_action :check_unauthorization, only: %i[edit update destroy]
+  before_action :question, only: %i[show edit update destroy]
+  before_action :authorize_access, only: %i[edit update destroy]
 
   # GET /questions or /questions.json
   def index
-    @questions = Question.includes(:user).all.order(upvotes_count: :DESC)
+    @questions = Question.includes(:user, :answers).order(upvotes_count: :DESC).all
   end
 
   # GET /questions/1 or /questions/1.json
-  def show; end
+  def show
+    @popular_answers = @question.answers.order(upvotes_count: :DESC)
+  end
 
   # GET /questions/new
   def new
@@ -58,25 +60,11 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def like
-    @question = Question.find(params[:id])
-    @question.likes.create(user: current_user, is_liked: true)
-    @question.update(likes_count: @question.likes.where(is_liked: true).count)
-    render json: { likes_count: @question.likes_count }
-  end
-
-  def dislike
-    @question = Question.find(params[:id])
-    @question.likes.create(user: current_user, is_liked: false)
-    @question.update(dislikes_count: @question.likes.where(is_liked: false).count)
-    render json: { dislikes_count: @question.dislikes_count }
-  end
-
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_question
-    @question = Question.find(params[:id])
+  # Callback to share common setup or constraints between actions.
+  def question
+    @question ||= Question.includes(:user, :answers).find_by(id: params[:id])
   end
 
   # Only allow a list of trusted parameters through.
@@ -84,9 +72,8 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:title, :body)
   end
 
-  def check_unauthorization
-    return if @question.user.eql?(current_user)
-
-    redirect_to authenticated_root_path, alert: 'You are not authorized to access this post.'
+  # Check if user is authorized to access the question
+  def authorize_access
+    authorize @question
   end
 end
