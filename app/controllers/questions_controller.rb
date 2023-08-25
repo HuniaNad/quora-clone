@@ -10,7 +10,9 @@ class QuestionsController < ApplicationController
   end
 
   # GET /questions/1 or /questions/1.json
-  def show; end
+  def show
+    @popular_answers = @question.answers.order(upvotes_count: :DESC)
+  end
 
   # GET /questions/new
   def new
