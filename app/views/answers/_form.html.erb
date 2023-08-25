@@ -1,0 +1,4 @@
+<%= form_with(model: [question, question.answers.build]) do |form| %>
+    <%= form.text_area :body, placeholder: 'Write your answer...', rows: 4, class: 'form-control' %>
+    <%= form.submit 'Submit Answer', class: 'btn btn-primary mt-2' %>
+<% end %>

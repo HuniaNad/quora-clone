@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_22_063950) do
+ActiveRecord::Schema.define(version: 2023_08_24_152145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,51 @@ ActiveRecord::Schema.define(version: 2023_08_22_063950) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "answers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "question_id"
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "upvotes_count", default: 0, null: false
+    t.integer "downvotes_count", default: 0, null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
+  end
+
+  create_table "downvotes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "downvotable_type", null: false
+    t.bigint "downvotable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["downvotable_type", "downvotable_id"], name: "index_downvotes_on_downvotable_type_and_downvotable_id"
+    t.index ["user_id", "downvotable_type", "downvotable_id"], name: "index_downvotes_on_user_and_downvotable", unique: true
+    t.index ["user_id"], name: "index_downvotes_on_user_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.integer "upvotes_count", default: 0, null: false
+    t.integer "downvotes_count", default: 0, null: false
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "upvotes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "upvotable_type", null: false
+    t.bigint "upvotable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["upvotable_type", "upvotable_id"], name: "index_upvotes_on_upvotable_type_and_upvotable_id"
+    t.index ["user_id", "upvotable_type", "upvotable_id"], name: "index_upvotes_on_user_id_and_upvotable_type_and_upvotable_id", unique: true
+    t.index ["user_id"], name: "index_upvotes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -58,4 +103,9 @@ ActiveRecord::Schema.define(version: 2023_08_22_063950) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
+  add_foreign_key "downvotes", "users"
+  add_foreign_key "questions", "users"
+  add_foreign_key "upvotes", "users"
 end
