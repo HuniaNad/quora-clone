@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddCountsToAnswers < ActiveRecord::Migration[5.2]
   def change
     change_table :answers, bulk: true do |t|

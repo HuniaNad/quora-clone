@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VotesController < ApplicationController
   def upvote
     @upvote = Upvote.find_by(user_id: current_user.id, upvotable_type: params[:type], upvotable_id: params[:id])
@@ -31,7 +33,6 @@ class VotesController < ApplicationController
     end
 
     render json: { upvotes_count: @upvote.upvotable.upvotes_count }
-
   end
 
   def upvote_dec_downvote_inc
@@ -40,7 +41,8 @@ class VotesController < ApplicationController
 
     if @upvote
       @upvote.destroy
-      @downvote = Downvote.create(user_id: current_user.id, downvotable_type: params[:type], downvotable_id: params[:id])
+      @downvote = Downvote.create(user_id: current_user.id, downvotable_type: params[:type],
+                                  downvotable_id: params[:id])
     end
 
     render json: { upvotes_count: @upvote.upvotable.upvotes_count }

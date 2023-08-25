@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions or /questions.json
   def index
-    @questions = Question.includes(:user, :answers).all.order(upvotes_count: :DESC)
+    @questions = Question.includes(:user, :answers).order(upvotes_count: :DESC).all
   end
 
   # GET /questions/1 or /questions/1.json
@@ -64,7 +64,7 @@ class QuestionsController < ApplicationController
 
   # Callback to share common setup or constraints between actions.
   def question
-    @question ||= Question.find(params[:id])
+    @question ||= Question.includes(:user, :answers).find_by(id: params[:id])
   end
 
   # Only allow a list of trusted parameters through.
