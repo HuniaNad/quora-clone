@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'turbolinks:load', ->
     $('.question-card').each ->
         qId = $(this).data('q-id')
         answersContainer = this.querySelector("div .answers-container")
