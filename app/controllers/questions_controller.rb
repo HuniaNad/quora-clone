@@ -62,7 +62,7 @@ class QuestionsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # Callback to share common setup or constraints between actions.
   def set_question
     @question = Question.find(params[:id])
   end
@@ -72,9 +72,10 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:title, :body)
   end
 
+  # Check if user is authorized to access the question
   def authorize_access
     return if @question.user.eql?(current_user)
 
-    redirect_to authenticated_root_path, alert: 'You are not authorized to access this post.'
+    redirect_to authenticated_root_path, alert: 'You are not authorized to access this question.'
   end
 end

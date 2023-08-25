@@ -1,14 +1,13 @@
-class AnswersController < ApplicationController   
+class AnswersController < ApplicationController
+    before_action :set_question, only: %i[index create destroy]
 
-    def index 
-        @question = Question.find(params[:question_id])
-        @top_answers = @question.answers.order(upvotes_count: :DESC).limit(2)
+    def index
+        @top_answers = @question.answers.includes(:user).order(upvotes_count: :DESC).limit(2)
 
-        render json: @top_answers
+        render json: @top_answers.to_json(include: :user)
     end
     
     def create
-        @question = Question.find(params[:question_id])
         @answer = @question.answers.build(answer_params)
         @answer.user = current_user
 
@@ -19,9 +18,7 @@ class AnswersController < ApplicationController
         end
     end
 
-    def destroy 
-        puts "------------->", params.inspect
-        @question = Question.find(params[:question_id])
+    def destroy
         @answer = @question.answers.find(params[:id])
 
         if @answer.destroy
@@ -33,6 +30,12 @@ class AnswersController < ApplicationController
 
     private
 
+    # Callback to share common setup or constraints between actions.
+    def set_question
+        @question = Question.includes(:user, :answers).find(params[:question_id])
+    end
+
+    # Only allow a list of trusted parameters through.
     def answer_params
         params.require(:answer).permit(:body)
     end

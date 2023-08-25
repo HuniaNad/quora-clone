@@ -42,10 +42,7 @@
                 <div class="d-flex flex-column-reverse w-100 align-items-center">
                   <div class="answers-container">
                   </div>
-
-                  <%# <%= render partial: 'answers/answer', collection: @top_answer, as: :answer %>
-
-                  <%# <%= render partial: 'answers/form', local: { question: question } %> 
+                  <%= render partial: 'answers/form', locals: { question: question } %>%
                 </div>
                 
               </div>
