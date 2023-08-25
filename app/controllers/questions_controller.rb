@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[show edit update destroy]
+  before_action :question, only: %i[show edit update destroy]
   before_action :authorize_access, only: %i[edit update destroy]
 
   # GET /questions or /questions.json
@@ -63,8 +63,8 @@ class QuestionsController < ApplicationController
   private
 
   # Callback to share common setup or constraints between actions.
-  def set_question
-    @question = Question.find(params[:id])
+  def question
+    @question ||= Question.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

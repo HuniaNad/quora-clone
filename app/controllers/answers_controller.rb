@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-    before_action :set_question, only: %i[index create destroy]
+    before_action :question, only: %i[index create destroy]
 
     def index
         @top_answers = @question.answers.includes(:user).order(upvotes_count: :DESC).limit(2)
@@ -31,8 +31,8 @@ class AnswersController < ApplicationController
     private
 
     # Callback to share common setup or constraints between actions.
-    def set_question
-        @question = Question.includes(:user, :answers).find(params[:question_id])
+    def question
+        @question ||= Question.includes(:user, :answers).find_by(id: params[:question_id])
     end
 
     # Only allow a list of trusted parameters through.
