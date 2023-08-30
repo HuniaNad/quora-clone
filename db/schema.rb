@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_24_152145) do
+ActiveRecord::Schema.define(version: 2023_08_30_085026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(version: 2023_08_24_152145) do
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
+  create_table "categorizations", force: :cascade do |t|
+    t.bigint "question_id"
+    t.bigint "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id", "topic_id"], name: "index_categorizations_on_question_id_and_topic_id", unique: true
+    t.index ["question_id"], name: "index_categorizations_on_question_id"
+    t.index ["topic_id", "question_id"], name: "index_categorizations_on_topic_id_and_question_id", unique: true
+    t.index ["topic_id"], name: "index_categorizations_on_topic_id"
+  end
+
   create_table "downvotes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "downvotable_type", null: false
@@ -68,6 +79,27 @@ ActiveRecord::Schema.define(version: 2023_08_24_152145) do
     t.integer "upvotes_count", default: 0, null: false
     t.integer "downvotes_count", default: 0, null: false
     t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "topic_followings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id", "user_id"], name: "index_topic_followings_on_topic_id_and_user_id", unique: true
+    t.index ["topic_id"], name: "index_topic_followings_on_topic_id"
+    t.index ["user_id", "topic_id"], name: "index_topic_followings_on_user_id_and_topic_id", unique: true
+    t.index ["user_id"], name: "index_topic_followings_on_user_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_topics_on_title", unique: true
+    t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
   create_table "upvotes", force: :cascade do |t|
@@ -105,7 +137,12 @@ ActiveRecord::Schema.define(version: 2023_08_24_152145) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "categorizations", "questions"
+  add_foreign_key "categorizations", "topics"
   add_foreign_key "downvotes", "users"
   add_foreign_key "questions", "users"
+  add_foreign_key "topic_followings", "topics"
+  add_foreign_key "topic_followings", "users"
+  add_foreign_key "topics", "users"
   add_foreign_key "upvotes", "users"
 end

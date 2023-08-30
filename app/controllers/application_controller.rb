@@ -4,14 +4,19 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  
+  rescue_from ActionController::RoutingError, with: :route_not_found
+
   private
 
   def user_not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'
     redirect_to(request.referer || authenticated_root_path)
+  end
+
+  def route_not_found
+    render 'public/404', layout: false, status: :not_found
   end
 
   protected

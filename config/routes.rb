@@ -5,14 +5,13 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'users/:id', to: 'users/registrations#show', as: 'profile'
     authenticated :user do
-      root 'public#index', as: :authenticated_root
+      root 'questions#index', as: :authenticated_root
     end
     unauthenticated :user do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
 
-  get 'public/index'
   resources :questions do
     resources :answers, except: %i[edit update show]
   end
@@ -34,4 +33,12 @@ Rails.application.routes.draw do
       post :upvote_dec_downvote_inc, to: 'votes#upvote_dec_downvote_inc', type: 'Answer'
     end
   end
+
+  resources :topics, except: [:destroy] do
+    member do
+      post :follow, to: 'topic_followings#create_or_destroy'
+    end
+  end
+  get 'search/suggestions', to: 'search#suggestions'
+  get 'about', to: 'about#index', as: 'about'
 end

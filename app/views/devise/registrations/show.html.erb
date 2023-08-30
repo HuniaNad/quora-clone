@@ -2,8 +2,8 @@
     <div class="row">
       <div class="col-md-4">
         <!-- Profile Image -->
-        <% if @user.image.attached? %>
-            <%= image_tag(current_user.image, style: 'height: 100px; width: 100px; display: inline-block; border-radius: 50%;
+        <% if @user.image&.attached? %>
+            <%= image_tag(@user.image, style: 'height: 100px; width: 100px; display: inline-block; border-radius: 50%;
                 object-fit: cover;') %>
         <% else %>
             <span class="material-icons md-48">
@@ -20,5 +20,13 @@
         <p><strong>Age:</strong> <%= @user.age %></p>
         <p><strong>Gender:</strong> <%= @user.gender %></p>
       </div>
+      
+    </div>
+    <div class="row">
+      <div class="col">
+        <h2 class="text-center font-weight-bold">Answered Questions</h2>
+        <%= render partial: 'user_questions', collection: fetch_answered_questions(@user), as: :answer  %>
+      </div>
+
     </div>
   </div>

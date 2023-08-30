@@ -6,7 +6,7 @@
         data-vote="upvote" 
         data-id="<%= entity.id %>" 
         data-type="<%= format_entity_name(entity) %>" 
-        <%= "enabled" if has_user_upvoted?(entity, current_user) %>
+        <%= "enabled" if user_upvoted?(entity, current_user) %>
     >
         <span class="material-icons">thumb_up</span> Upvote &#8226; 
         <span class="likes-count-<%= entity.id %>"> <%= entity.upvotes_count %> </span>
@@ -18,8 +18,9 @@
         data-vote="downvote" 
         data-id="<%= entity.id %>" 
         data-type="<%= format_entity_name(entity) %>"
-        <%= "enabled" if has_user_downvoted?(entity, current_user) %>
+        <%= "enabled" if user_downvoted?(entity, current_user) %>
     >
         <span class="material-icons">thumb_down</span>
     </button>
 </div>
+<p class="error-msg-vote bg-danger text-light"></p>

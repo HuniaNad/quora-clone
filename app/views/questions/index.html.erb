@@ -1,7 +1,24 @@
 
-<h1>Questions</h1>
 
-<%= link_to 'New Question', new_question_path, class: 'btn btn-success' %>
+<div class="d-flex">
+  <div class="mx-2">
+    <%= link_to 'New Question', new_question_path, class: 'btn btn-success p-1' %>
+  </div>
+  <div class="mx-2">
+    <a class="nav-link dropdown-toggle btn btn-warning p-1" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Topics</a>
+    <div class="dropdown-menu">
+      <%= link_to 'New', new_topic_path, class: 'dropdown-item' %>
+      <%= link_to 'View All', topics_path, class: 'dropdown-item' %>
+    </div>
+  </div>
+  <div class="mx-2">
+    <%= link_to 'About', about_path, class: 'btn btn-secondary p-1' %>
+  </div>
+</div>
+
+
+
+<%= render partial: 'search/form' %>
 
 <% @questions.each do |question| %>
     <div class="container mt-4">
@@ -44,6 +61,7 @@
                   </div>
                   <%= render partial: 'answers/form', locals: { question: question } %>
                 </div>
+                <p class="error-msg-answer bg-danger text-light"></p>
                 
               </div>
             </div>

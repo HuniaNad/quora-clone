@@ -2,9 +2,11 @@
 
 class AddDetailsToUsers < ActiveRecord::Migration[5.2]
   def change
-    add_column :users, :name, :string, null: false, default: ''
-    add_column :users, :username, :string, null: false, default: ''
-    add_column :users, :age, :integer, null: false, default: 18
-    add_column :users, :gender, :string, null: false, default: ''
+    change_table :users, bulk: true do |t|
+      t.add_column :name, :string, null: false, default: ''
+      t.add_column :username, :string, null: false, default: ''
+      t.add_column :age, :integer, null: false, default: 18
+      t.add_column :gender, :string, null: false, default: ''
+    end
   end
 end

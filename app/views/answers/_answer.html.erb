@@ -23,7 +23,7 @@
             <%= link_to 'Delete', [answer.question, answer], method: :delete, data: { confirm: "Are you sure you want to delete this answer?" } %>
           <% end %> 
           
-          <%= render partial: 'voting', locals: { entity: answer } %>
+          <%= render partial: 'questions/voting', locals: { entity: answer } %>
         </div>
       </div>
 

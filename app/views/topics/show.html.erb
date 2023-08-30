@@ -1,0 +1,37 @@
+
+<% if policy(@topic).update? %>
+  <%= link_to 'Edit', edit_topic_path(@topic) %> |
+<% end %> 
+<%= link_to 'Back', topics_path %>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <% if @topic.image&.attached? %>
+          <%= image_tag(@topic.image, class: 'card-img-top') %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= @topic.title.titlecase %>
+          </h5>
+          <p class="card-text">
+            <%= @topic.description.capitalize %>
+          </p>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between">
+          
+          <%= render partial: 'following', locals: { topic: @topic } %>
+        </div>
+      </div>   
+        
+    </div>
+  </div>
+</div>  
+
+<div class="container mt-4">
+  <%= paginate @associated_questions %>
+  <%= render partial: 'about/questions', collection: @associated_questions, as: :question %>
+</div>
+
+

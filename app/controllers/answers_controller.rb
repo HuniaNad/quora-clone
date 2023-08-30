@@ -4,7 +4,7 @@ class AnswersController < ApplicationController
   before_action :question, only: %i[index create destroy]
 
   def index
-    @top_answers = @question.answers.includes(:user).order(upvotes_count: :DESC).limit(2)
+    @top_answers = @question.answers.order(upvotes_count: :DESC).limit(2)
 
     render json: @top_answers.to_json(include: :user)
   end
@@ -12,7 +12,6 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.build(answer_params)
     @answer.user = current_user
-    authorize @answer
 
     if @answer.save
       redirect_to @question, notice: 'Answer was successfully created.'

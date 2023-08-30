@@ -15,8 +15,8 @@ $(document).on 'click', '.vote-button', ->
         dataType: 'json'
         success: (response) ->
             $('.likes-count-' + entityId).text(response.upvotes_count)
-        error: (xhr, status, error) ->
-            console.log("AJAX error:", error)
+        error: (xhr) ->
+            $('.error-msg').text("#{xhr.status}: #{xhr.statusText}")
  
     else if voteType == 'downvote' and upvoteBtn?.hasAttribute('enabled')
       # Code for handling downvote with upvote already enabled
@@ -28,8 +28,8 @@ $(document).on 'click', '.vote-button', ->
         dataType: 'json'
         success: (response) ->
             $('.likes-count-' + entityId).text(response.upvotes_count)
-        error: (xhr, status, error) ->
-            console.log("AJAX error:", error)
+        error: (xhr) ->
+            $('.error-msg').text("#{xhr.status}: #{xhr.statusText}")
     else
       this.toggleAttribute('enabled')
       $.ajax
@@ -39,7 +39,7 @@ $(document).on 'click', '.vote-button', ->
         success: (response) ->
             if voteType == 'upvote'
                 $('.likes-count-' + entityId).text(response.upvotes_count)
-        error: (xhr, status, error) ->
-            console.log("AJAX error:", error)
+        error: (xhr) ->
+            $('.error-msg-vote').text("#{xhr.status}: #{xhr.statusText}")
 
     

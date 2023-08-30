@@ -12,3 +12,16 @@
  *= require material_icons
  */
  @import 'bootstrap';
+ @import 'select2';
+
+ [enabled] {
+    background-color: lightgreen;
+    border: 2px solid green;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+      }
+  }

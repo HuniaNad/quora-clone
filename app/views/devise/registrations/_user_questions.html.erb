@@ -1,0 +1,37 @@
+<div class="container mt-4">
+    <div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center mb-3">
+                    <% if answer.question&.user&.image&.attached? %>
+                    <%= image_tag(answer.question.user.image, style: 'height: 30px; width: 30px; display: inline-block; border-radius: 50%;') %>
+                    <% else %>
+                    <span class="material-icons md-24 rounded-circle">
+                        account_circle
+                    </span>
+                    <% end %>
+                    <h5>
+                        <%= link_to answer.question.user.name, profile_path(answer.question.user_id) %>
+                    </h5>
+                </div>
+
+                <%= link_to 'Open', answer.question, class: 'btn btn-warning' %>
+            </div>
+            
+            <div class="card-body">
+                <h5 class="card-title">
+                    <%= answer.question.title.titlecase %>
+                </h5>
+                <p class="card-text">
+                    <%= truncate(answer.question.body.capitalize, length: 140) %>
+                </p>
+            </div>
+
+            <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                Posted on <%= answer.question.created_at.strftime('%B %e, %Y %l:%M %p') %>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>  

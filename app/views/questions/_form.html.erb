@@ -10,6 +10,11 @@
       </ul>
     </div>
   <% end %>
+  
+  <div class="field">
+    <%= form.label 'Topic' %>
+    <%= select_tag 'topics[]', options_for_select(@topics, select_default_topic(question)), multiple: 'true', class: 'select2' %>
+  </div>
 
   <div class="field">
     <%= form.label :title %>

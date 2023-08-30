@@ -9,10 +9,6 @@ class AnswerPolicy < ApplicationPolicy
     @answer = answer
   end
 
-  def update?
-    user == answer.user
-  end
-
   def destroy?
     user == answer.user
   end

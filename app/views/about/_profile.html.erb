@@ -1,0 +1,24 @@
+<div>
+    <div class="row">
+      <div class="col-md-4">
+        <!-- Profile Image -->
+        <% if current_user.image&.attached? %>
+            <%= image_tag(current_user.image, style: 'height: 100px; width: 100px; display: inline-block; border-radius: 50%;
+                object-fit: cover;') %>
+        <% else %>
+            <span class="material-icons md-48">
+                account_circle
+                </span>
+        <% end %>
+        
+      </div>
+      <div class="col-md-8">
+        <!-- Profile Information -->
+        <h1><%= current_user.name %></h1>
+        <p><strong>Email:</strong> <%= current_user.email %></p>
+        <p><strong>Username:</strong> <%= current_user.username %></p>
+        <p><strong>Age:</strong> <%= current_user.age %></p>
+        <p><strong>Gender:</strong> <%= current_user.gender %></p>
+      </div> 
+    </div>
+</div>
