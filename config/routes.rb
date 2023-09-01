@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
     get 'users/:id', to: 'users/registrations#show', as: 'profile'
+    delete 'users/image/:id', to: 'users/registrations#destroy_image', as: 'profile_image_delete'
+
     authenticated :user do
       root 'questions#index', as: :authenticated_root
     end

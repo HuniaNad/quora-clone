@@ -1,0 +1,12 @@
+.nav-item.nav-link.active.show{
+    background-color: $red;
+    color: white;
+}
+
+.profile-image {
+    height: 110px;
+    width: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid;
+}

@@ -10,5 +10,15 @@ class Question < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true
-  validates :topics, presence: { message: "Atleast select 1 topic for your question" }
+  validate :at_least_one_topic
+
+  def thumbnail
+    image.variant(resize: '50x50').processed
+  end
+
+  private
+
+  def at_least_one_topic
+    errors.add(:base, 'At least one topic must be selected') if topic_ids.empty?
+  end
 end

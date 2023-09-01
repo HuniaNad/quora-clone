@@ -1,0 +1,51 @@
+a {
+    color: $red;
+
+    &:hover {
+        color: $red
+    }
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:visited {
+    background-color: $red !important;
+    box-shadow: none !important;
+}
+
+.btn {
+    border: none !important;  
+}
+
+.btn-primary:hover {
+    background-color: $btn-hover !important;
+}
+
+.form-control:focus {
+    border-color: $input-border;
+    box-shadow: 0 0 0 0.2rem $input-shadow;
+}
+
+input[type="file"] {
+    text-align-last: center;
+}
+
+.circular-image {
+    border-radius: 50%;
+    overflow: hidden;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
+.display-image {
+    height: 35px;
+    width: 35px;
+    border: 1px solid $lightBorderGrey;
+    border-radius: 50%;
+}
+
+.card {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+ 
+

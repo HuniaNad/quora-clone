@@ -1,3 +1,37 @@
-// Place all the styles related to the Questions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.homepage-ask {
+    width: 500px;
+    margin-bottom: 0;
+
+    a{
+        width: 100%;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .card {
+        padding: 15px;
+        margin-bottom: 0;
+    }
+
+    .input-field {
+        border: 1px solid $lightBorderGrey;
+        background-color: #f9f9f9d1;
+        color: $borderGrey;
+        padding: 3px 10px;
+        border-radius: 50px;
+        margin: 0 10px;
+        font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+        
+        i {
+            color: $red;
+        }
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+}

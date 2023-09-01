@@ -1,0 +1,25 @@
+.image-preview {
+    height: 300px;
+    object-fit: contain;
+}
+
+.topics-image {
+    height: 300px;
+    object-fit: cover;
+}
+
+.topics-image-preview {
+    height: 100px;
+    object-fit: cover;
+}
+
+.new-topic-icon {
+    position: absolute;
+    right: 0;
+    margin: 20px 70px;
+    
+    &:hover {
+        color: $btn-hover;
+    }
+
+}

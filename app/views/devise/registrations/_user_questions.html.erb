@@ -3,20 +3,19 @@
     <div class="col-md-8 offset-md-2">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center mb-3">
-                    <% if answer.question&.user&.image&.attached? %>
-                    <%= image_tag(answer.question.user.image, style: 'height: 30px; width: 30px; display: inline-block; border-radius: 50%;') %>
+                <div class="d-flex align-items-center">
+
+                    <% if answer.question.user&.image&.attached? %>
+                    <%= image_tag(answer.question.user.preview, class: 'circular-image display-image' ) %>
                     <% else %>
-                    <span class="material-icons md-24 rounded-circle">
-                        account_circle
-                    </span>
+                    <%= icon('fa-solid', 'circle-user fa-2x')%>
                     <% end %>
-                    <h5>
-                        <%= link_to answer.question.user.name, profile_path(answer.question.user_id) %>
-                    </h5>
+                    <%= link_to answer.question.user.name, profile_path(answer.question.user_id), class: 'ml-2' %>
                 </div>
 
-                <%= link_to 'Open', answer.question, class: 'btn btn-warning' %>
+                <%= link_to answer.question, data: { toggle: "tooltip", placement:"top" }, title: "Open Question" do %>
+                    <%= icon('fa-solid', 'up-right-from-square fa-1x')%>
+                <% end %>
             </div>
             
             <div class="card-body">
@@ -29,7 +28,7 @@
             </div>
 
             <div class="card-footer text-muted d-flex justify-content-between align-items-center">
-                Posted on <%= answer.question.created_at.strftime('%B %e, %Y %l:%M %p') %>
+                Posted on <%= pakistan_timezone(answer.question) %>
             </div>
         </div>
     </div>

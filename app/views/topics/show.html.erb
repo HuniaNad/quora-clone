@@ -1,37 +1,48 @@
 
-<% if policy(@topic).update? %>
-  <%= link_to 'Edit', edit_topic_path(@topic) %> |
-<% end %> 
-<%= link_to 'Back', topics_path %>
+<div class="container mt-4 col-6">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+          <% if @topic.user&.image&.attached? %>
+            <%= image_tag(@topic.user.image, class: 'circular-image display-image' ) %>
+          <% else %>
+            <%= icon('fa-solid', 'circle-user fa-2x')%>
+          <% end %>
+          <%= link_to @topic.user.name, profile_path(@topic.user_id), class: 'ml-2' %>
+      </div>
 
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <div class="card">
-        <% if @topic.image&.attached? %>
-          <%= image_tag(@topic.image, class: 'card-img-top') %>
-        <% end %>
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= @topic.title.titlecase %>
-          </h5>
-          <p class="card-text">
-            <%= @topic.description.capitalize %>
-          </p>
-        </div>
-        <div class="card-footer text-muted d-flex justify-content-between">
-          
-          <%= render partial: 'following', locals: { topic: @topic } %>
-        </div>
-      </div>   
-        
+      <div>
+        <% if policy(@topic).update? %>
+          <%= link_to edit_topic_path(@topic), class: "m-2", data: { toggle: "tooltip", placement:"top" }, title: "Edit" do %>
+            <%= icon('fa-solid', 'pen-to-square') %>
+          <% end %>
+        <% end %> 
+      </div>
     </div>
-  </div>
+
+    <% if @topic.image&.attached? %>
+      <%= image_tag(@topic.card_image, class: 'card-img-top topics-image') %><hr>
+    <% end %>
+    <div class="card-body pt-0">
+      <h5 class="card-title">
+        <%= @topic.title.titlecase %>
+      </h5>
+      <p class="card-text">
+        <%= @topic.description.capitalize %>
+      </p>
+    </div>
+    <div class="card-footer text-muted">
+      <%= render partial: 'following', locals: { topic: @topic } %>
+    </div>
+  </div>   
+        
 </div>  
 
 <div class="container mt-4">
-  <%= paginate @associated_questions %>
+  <h4 class="text-center">Related Questions</h4>
+  <hr>
   <%= render partial: 'about/questions', collection: @associated_questions, as: :question %>
+  <%= paginate @associated_questions %>
 </div>
 
 

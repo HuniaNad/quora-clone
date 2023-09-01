@@ -4,7 +4,7 @@ class AnswersController < ApplicationController
   before_action :question, only: %i[index create destroy]
 
   def index
-    @top_answers = @question.answers.order(upvotes_count: :DESC).limit(2)
+    @top_answers = @question.answers.top_answers
 
     render json: @top_answers.to_json(include: :user)
   end
@@ -14,9 +14,9 @@ class AnswersController < ApplicationController
     @answer.user = current_user
 
     if @answer.save
-      redirect_to @question, notice: 'Answer was successfully created.'
+      redirect_to @question, notice: t(:create_success)
     else
-      render 'questions/show', status: :unprocessable_entity
+      redirect_to @question, alert: t(:create_fail)
     end
   end
 
@@ -25,9 +25,10 @@ class AnswersController < ApplicationController
     authorize @answer
 
     if @answer.destroy
-      redirect_to @question, notice: 'Answer was successfully deleted.'
+      redirect_to @question, notice: t(:delete_success)
     else
-      render 'questions/show', status: :unprocessable_entity
+      flash.now[:alert] = t(:delete_fail)
+      render question
     end
   end
 

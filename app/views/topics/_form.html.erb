@@ -11,21 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.file_field :image, accept: 'image/jpeg, image/png' %>
+  <div class="text-center mb-2">
+    <% if topic.image&.attached? %>
+        <%= image_tag(topic.card_image, class: 'topics-image-preview') %>
+    <% else %>
+      <%= icon('fa-solid', 'panorama fa-5x')%>
+    <% end %>
   </div>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="form-group">
+    <%= form.file_field :image, class: 'form-control-file text-center', accept: 'image/jpeg, image/png', required: (true unless topic.image&.attached?) %>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="form-group">
+      <%= form.label :title, class: 'control-label' %>
+      <%= form.text_field :title, class: 'form-control', required: true %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+      <%= form.label :description, class: 'control-label' %>
+      <%= form.text_area :description, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group text-center">
+    <%= form.submit class: 'btn btn-primary px-5' %>
   </div>
 <% end %>

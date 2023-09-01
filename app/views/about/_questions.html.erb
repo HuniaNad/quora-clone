@@ -2,33 +2,7 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card question-card" data-q-id="<%= question.id %>">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                <div class="d-flex flex-column align-items-center mb-3">
-                    <% if question.user&.image&.attached? %>
-                    <%= image_tag(question.user.image, style: 'height: 30px; width: 30px; display: inline-block; border-radius: 50%;') %>
-                    <% else %>
-                    <span class="material-icons md-24 rounded-circle">
-                        account_circle
-                    </span>
-                    <% end %>
-                    <%= link_to question.user.name, profile_path(question.user_id) %>
-                </div>
-
-                <%= link_to question do %>
-                    <i class="material-icons">visibility</i>
-                <% end %>
-                </div>
-
-                <div class="card-body">
-                <h5 class="card-title">
-                    <%= link_to question.title.titlecase, question %>
-                </h5>
-                <p class="card-text">
-                    <%= truncate(question.body.capitalize, length: 140) %>
-                </p>
-
-                <%= render partial: 'questions/voting', locals: { entity: question } %>
-                </div>
+                <%= render partial: 'questions/card_body', locals: { question: question } %>
 
                 <div class="card-footer text-muted d-flex justify-content-between align-items-center">
                     <p>

@@ -1,3 +1,39 @@
-// Place all the styles related to the Votes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.btn.vote-button[data-vote='upvote'], .btn.vote-button[data-vote='downvote'], .btn.follow-button[data-type='follow']   {
+    border: 1px solid $borderGrey !important;
+
+    i {
+        font-size: 18px;
+        color: $borderGrey;
+    }
+    
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+
+.btn.vote-button[data-vote='upvote'][enabled] {
+    color: $blue;
+    i {
+        color: $blue;
+    }
+}
+.btn.vote-button[data-vote='downvote'][enabled] {
+    color: $red;
+    i {
+        color: $red;
+    }
+}
+.btn.follow-button[data-type='follow'][enabled] {
+    color: $green;
+    i {
+        color: $green;
+    }
+}
+  
+  
+  
+  
+  
+  

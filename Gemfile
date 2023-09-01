@@ -25,12 +25,16 @@ gem 'turbolinks', '~> 5'
 gem 'active_storage_validations'
 gem 'bootstrap', '~> 4.0.0'
 gem 'devise'
+gem 'faker'
+gem 'ffaker', '2.21.0'
+gem 'font-awesome-sass', '~> 6.4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'material_icons'
 gem 'pundit'
 gem 'select2-rails'
+gem 'sidekiq', '~> 5.2', '>= 5.2.5'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -38,7 +42,7 @@ gem 'select2-rails'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

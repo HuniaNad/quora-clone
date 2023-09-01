@@ -14,10 +14,17 @@ class User < ApplicationRecord
   has_many :topic_followings, dependent: :destroy
   has_many :topics, through: :topic_followings
 
-
   validates :name, presence: true
   validates :username, presence: true
   validates :age, presence: true, numericality: { greater_than_or_equal_to: 18 }
   validates :gender, presence: true
   validates :image, attached: true, content_type: ['image/png', 'image/jpeg']
+
+  def thumbnail
+    image.variant(resize: '30x30').processed
+  end
+
+  def preview
+    image.variant(resize: '150x150').processed
+  end
 end

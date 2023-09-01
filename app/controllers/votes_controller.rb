@@ -4,11 +4,7 @@ class VotesController < ApplicationController
   def upvote
     find_upvote
 
-    if @upvote
-      @upvote.destroy
-    else
-      add_upvote
-    end
+    @upvote ? @upvote.destroy : add_upvote
 
     render json: { upvotes_count: @upvote.upvotable.upvotes_count }
   end
@@ -16,11 +12,7 @@ class VotesController < ApplicationController
   def downvote
     find_downvote
 
-    if @downvote
-      @downvote.destroy
-    else
-      add_downvote
-    end
+    @downvote ? @downvote.destroy : add_downvote
   end
 
   def upvote_inc_downvote_dec
@@ -29,7 +21,7 @@ class VotesController < ApplicationController
 
     if @downvote
       @downvote.destroy
-      add_upvote
+      add_upvote if @downvote.destroyed?
     end
 
     render json: { upvotes_count: @upvote.upvotable.upvotes_count }
@@ -41,7 +33,7 @@ class VotesController < ApplicationController
 
     if @upvote
       @upvote.destroy
-      add_downvote
+      add_downvote if @upvote.destroyed?
     end
 
     render json: { upvotes_count: @upvote.upvotable.upvotes_count }
@@ -53,12 +45,12 @@ class VotesController < ApplicationController
     @upvote = Upvote.find_by(user_id: current_user.id, upvotable_type: params[:type], upvotable_id: params[:id])
   end
 
-  def add_upvote
-    @upvote = Upvote.create(user_id: current_user.id, upvotable_type: params[:type], upvotable_id: params[:id])
-  end
-
   def find_downvote
     @downvote = Downvote.find_by(user_id: current_user.id, downvotable_type: params[:type], downvotable_id: params[:id])
+  end
+
+  def add_upvote
+    @upvote = Upvote.create(user_id: current_user.id, upvotable_type: params[:type], upvotable_id: params[:id])
   end
 
   def add_downvote

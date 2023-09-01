@@ -1,26 +1,71 @@
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand text-danger font-weight-bold" href="/">Quora Clone</a>
-    <div class="d-flex flex-row">
-      <ul class="navbar-nav ml-auto">
-        <% if current_user %>
-          <li class="nav-item"> 
-            <%= link_to edit_user_registration_path do %>
-              <% if current_user&.image.attached? %>
-                <%= image_tag(current_user.image, style: 'height: 50px; width: 50px; display: inline-block; border-radius: 50%;
-                object-fit: cover;') %>
+<nav class="navbar navbar-expand-lg bg-light justify-content-between mb-4">
+  <%= link_to "Quora Clone", authenticated_root_path, class: "navbar-brand font-weight-bold" %>
+
+  <% if current_user %>
+    <%= render partial: 'search/form' %>
+  <% end %>
+
+  <div class="d-flex flex-row align-items-center">
+    <ul class="navbar-nav d-flex flex-row align-items-center">
+      <%# display picture along with drop down menu %>
+      <% if current_user %>
+        <li class="nav-item dropdown">
+          <%= link_to '#',
+            class: 'nav-link dropdown-toggle', id:"navbarDropdownMenuLink1",
+            data: {toggle: "dropdown", placement:"left"}, aria: { haspopup:"true", expanded: "false" }, 
+            title: "Profile" do %>
+            <% if current_user&.image.attached? %>
+                <%= image_tag(current_user.thumbnail, class: 'circlular-image display-image') %>
               <% else %>
-                <span class="material-icons md-48">
-                account_circle
-                </span>
+                <%= icon('fa-solid', 'circle-user fa-2x')%>
               <% end %>
+          <% end %> 
+
+          <div class="dropdown-menu mr-5" aria-labelledby="navbarDropdownMenuLink1">
+            <%= link_to 'Profile', about_path, class: 'dropdown-item' %>
+            <%= link_to 'Edit Profile', edit_user_registration_path, class: 'dropdown-item' %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>       
+        </li>
+      <% end %>
+
+      <button button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <%= icon('fa-solid', 'bars fa-1x')%>
+      </button>
+    <ul>
+
+    <%# toggler menu icon buttons %>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <% if current_user %>
+          <%# Home %>
+          <li class="nav-item">
+            <%= link_to authenticated_root_path, class: 'nav-link', data: { toggle: "tooltip", placement:"left" }, title: "Home" do %>
+              <%= icon('fa-solid', 'home fa-2x')%>
             <% end %> 
-          
           </li>
-          <li class="nav-item"> <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-small btn-primary mx-2" %></li>
-        <% else %>
-          <li class="nav-item"> <%= link_to "Sign Up", new_user_registration_path, class: "nav-link"  %></li>
-          <li class="nav-item"> <%= link_to "Sign In", new_user_session_path, class: "nav-link"  %></li>
+
+          <%# Topics %>
+          <li class="nav-item dropdown">
+            <%= link_to '#', 
+              class: 'nav-link dropdown-toggle', id:"navbarDropdownMenuLink2",
+              data: {toggle: "dropdown", placement:"left"}, aria: { haspopup:"true", expanded: "false" }, title: "Topics" do %>
+              <%= icon('fa-solid', 'list-check fa-2x')%>
+            <% end %> 
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+              <%= link_to 'New', new_topic_path, class: 'dropdown-item' %>
+              <%= link_to 'View All', topics_path, class: 'dropdown-item' %>
+            </div>
+          </li>
+
+          <%# New Question %>
+          <li class="nav-item">
+            <%= link_to new_question_path, class: 'nav-link', data: { toggle: "tooltip", placement:"left" }, title: "New Question" do %>
+              <%= icon('fa-solid', 'pen-fancy fa-2x')%>
+            <% end %> 
+          </li>
         <% end %>
       </ul>
     </div>

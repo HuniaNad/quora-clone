@@ -1,30 +1,54 @@
 
-<% if policy(@question).update? %>
-  <%= link_to 'Edit', edit_question_path(@question) %> |
-  <%= link_to 'Delete', question_path(@question), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %> |
-<% end %> 
-<%= link_to 'Back', questions_path %>
-
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= @question.title.titlecase %>
-          </h5>
-          <p class="card-text">
-            <%= @question.body.capitalize %>
-          </p>
+      <div class="card">        
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center justify-content-between w-100">
+                <div>
+                  <% if @question.user&.image&.attached? %>
+                    <%= image_tag(@question.user.preview, class: 'circular-image display-image' ) %>
+                  <% else %>
+                    <%= icon('fa-solid', 'circle-user fa-2x')%>
+                  <% end %>
+                  <%= link_to @question.user.name, profile_path(@question.user_id), class: 'ml-2' %>
+                </div>
+
+                <div>
+                  <% if policy(@question).update? %>
+                    <%= link_to edit_question_path(@question), class: "m-2", data: { toggle: "tooltip", placement:"top" }, title: "Edit" do %>
+                      <%= icon('fa-solid', 'pen-to-square') %>
+                    <% end %>
+
+                    <%= link_to question_path(@question), method: :delete, data: { confirm: "Are you sure you want to delete this post?", toggle: "tooltip", placement:"top" }, title: "Delete", class: "m-2" do %> 
+                      <%= icon('fa-solid', 'trash') %>
+                    <% end %>
+                  <% end %> 
+                </div>
+            </div>
+
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title mb-0 ">
+                <%= @question.title.titlecase%>
+            </h5>
+            <small class="text-muted font-italic">
+              Related to <%= generate_topics(@question) %>
+            </small>
+            <p class="card-text mt-3">
+                <%= @question.body.capitalize %>
+            </p>
+
+            <div class="d-flex justify-content-end">
+                <%= render partial: 'voting', locals: { entity: @question } %>
+            </div>
         </div>
-        <div class="card-footer text-muted d-flex justify-content-between align-items-center">
-          <span>Asked by 
-            <%= link_to @question.user.name, profile_path(@question.user_id) %>
-          </span>
 
-          <%= render partial: 'voting', locals: { entity: @question } %>
-
+        <div class="card-footer text-muted d-flex justify-content-between align-items-center w-100">
+          <p>
+            Posted: <%= pakistan_timezone(@question) %>
+          </p>
         </div>
       </div>
 
@@ -32,6 +56,7 @@
         <div class="mt-4">
           <h4>Answers</h4>
           <%= render partial: 'answers/answer', collection: @popular_answers %>
+          <%= paginate @popular_answers %>
         </div>
         
         <div class="mt-4">

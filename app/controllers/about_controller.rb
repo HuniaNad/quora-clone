@@ -2,16 +2,13 @@
 
 class AboutController < ApplicationController
   def index
-    # user info - About
-    @user = current_user
-
     # followed topics - Followed Topics
-    @followed_topics = @user.topic_followings.map(&:topic)
+    @followed_topics = current_user.topic_followings.map(&:topic)
 
     # asked questions - Questions
-    @questions = @user.questions
+    @questions = current_user.questions
 
     # answers to any questions - Answers
-    @answers = @user.answers
+    @answers = current_user.answers
   end
 end

@@ -1,0 +1,18 @@
+.autocomplete-suggestions {
+    background-color: #f7f7f7;
+    padding: 10px;
+    text-transform: capitalize;
+    border: 1px solid #dfdfdf;
+    border-top: none;
+    border-radius: 0px 0px 10px 10px;
+    padding: 0 !important;
+}
+.autocomplete-suggestion {
+    padding: 10px 12px;
+    border-bottom: 1px solid #dfdfdf;
+
+    &:hover {
+        background-color: #f5e7e7;
+        cursor: pointer;
+    }
+}

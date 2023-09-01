@@ -10,6 +10,6 @@ class SearchController < ApplicationController
     @topic = Topic.includes(:questions).find(params[:id])
     @questions = @topic.questions.includes(:user, :answers).order(upvotes_count: :desc)
   rescue ActiveRecord::RecordNotFound
-    redirect_to authenticated_root_path, notice: 'Topic not found'
+    redirect_to authenticated_root_path, alert: t(:topic_not_found)
   end
 end

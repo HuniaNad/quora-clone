@@ -31,3 +31,12 @@
 
 en:
   hello: "Hello world"
+  create_success: "Creation was successful"
+  update_success: "Updation was successful"
+  delete_success: "Deletion was successful"
+  create_fail: "Creation failed"
+  update_fail: "Updation failed"
+  delete_fail: "Deletion failed"
+  unauthorized: "You are not authorized to perform this action"
+  topic_not_found: "Topic not found"
+  similar_topic_exists: "A similar topic already exists"

@@ -1,63 +1,42 @@
-
-
-<div class="d-flex">
-  <div class="mx-2">
-    <%= link_to 'New Question', new_question_path, class: 'btn btn-success p-1' %>
-  </div>
-  <div class="mx-2">
-    <a class="nav-link dropdown-toggle btn btn-warning p-1" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Topics</a>
-    <div class="dropdown-menu">
-      <%= link_to 'New', new_topic_path, class: 'dropdown-item' %>
-      <%= link_to 'View All', topics_path, class: 'dropdown-item' %>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="homepage-ask">
+    <div class="card d-flex flex-row align-items-center">
+        <div>
+            <% if current_user.image&.attached? %>
+                <%= image_tag(current_user.preview, class: 'circular-image display-image' ) %>
+            <% else %>
+                <%= icon('fa-solid', 'circle-user fa-2x')%>
+            <% end %>
+        </div>
+         <%= link_to new_question_path, data: {toggle: "tooltip", placement:"bottom"}, title: "Add New Question" do %>
+          <div class="input-field">
+          <p>Do you have any question today? </p>
+          <%= icon('fa-solid', 'plus fa-1x')%>
+          </div>
+        <% end %>
+        
     </div>
-  </div>
-  <div class="mx-2">
-    <%= link_to 'About', about_path, class: 'btn btn-secondary p-1' %>
   </div>
 </div>
 
 
-
-<%= render partial: 'search/form' %>
 
 <% @questions.each do |question| %>
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card question-card" data-q-id="<%= question.id %>">
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <div class="d-flex flex-column align-items-center mb-3">
+              
+              <%= render partial: 'questions/card_body', locals: { question: question } %>
 
-                  <% if question.user&.image&.attached? %>
-                    <%= image_tag(question.user.image, style: 'height: 30px; width: 30px; display: inline-block; border-radius: 50%;') %>
-                  <% else %>
-                    <span class="material-icons md-24 rounded-circle">
-                      account_circle
-                    </span>
-                  <% end %>
-                  <%= link_to question.user.name, profile_path(question.user_id) %>
-                </div>
-
-                <%= link_to question do %>
-                  <i class="material-icons">visibility</i>
-                <% end %>
-              </div>
-
-              <div class="card-body">
-                <h5 class="card-title">
-                  <%= link_to question.title.titlecase, question %>
-                </h5>
-                <p class="card-text">
-                  <%= truncate(question.body.capitalize, length: 140) %>
-                </p>
-
-                <%= render partial: 'voting', locals: { entity: question } %>
-              </div>
-
-              <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+              <div class="card-footer text-muted d-flex justify-content-between align-items-center w-100">
 
                 <div class="d-flex flex-column-reverse w-100 align-items-center">
+                
                   <div class="answers-container">
+                    <% if answers_exist?(question) %>
+                      <h5 class="text-center"> Top 2 Answers </h5><hr>
+                    <% end %>
                   </div>
                   <%= render partial: 'answers/form', locals: { question: question } %>
                 </div>
@@ -70,6 +49,6 @@
     </div>  
 <% end %>
 
-<br>
+<%= paginate @questions, class:"text-center" %>
 
 

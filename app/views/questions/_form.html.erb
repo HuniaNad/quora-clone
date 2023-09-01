@@ -11,22 +11,22 @@
     </div>
   <% end %>
   
-  <div class="field">
-    <%= form.label 'Topic' %>
-    <%= select_tag 'topics[]', options_for_select(@topics, select_default_topic(question)), multiple: 'true', class: 'select2' %>
+  <div class="form-group">
+    <%= form.label 'Topic', class: 'control-label' %>
+    <%= form.select :topic_ids, options_from_collection_for_select(all_topics, :id, :title, @question.topic_ids), {}, { multiple: true, class: 'form-control selectpicker', data: { 'live-search' => 'true' }}  %>
   </div>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="form-group">
+      <%= form.label :title, class: 'control-label' %>
+      <%= form.text_field :title, class: 'form-control', required: true %>
   </div>
 
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
+  <div class="form-group">
+      <%= form.label :body, class: 'control-label' %>
+      <%= form.text_area :body, class: 'form-control', required: true %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group text-center">
+    <%= form.submit class: 'btn btn-primary px-5' %>
   </div>
 <% end %>

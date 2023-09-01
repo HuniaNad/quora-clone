@@ -2,11 +2,20 @@
 
 module Users
   class RegistrationsController < Devise::RegistrationsController
-    # before_action :configure_sign_up_params, only: [:create]
-    before_action :configure_account_update_params, only: [:update]
+    # before_action :configure_sign_up_params, [:create]
+    # before_action :configure_account_update_params, only: [:update]
 
     def show
       @user = User.find(params[:id])
+    end
+
+    def destroy_image
+      @image ||= ActiveStorage::Blob.find_signed(params[:id])
+      if @image.attachments.first.purge
+        redirect_to edit_user_registration_url, notice: t(:delete_success)
+      else
+        render edit_user_registration_url, alert: t(:delete_fail)
+      end
     end
 
     # GET /resource/sign_up
@@ -19,6 +28,7 @@ module Users
     #   super
     # end
 
+
     # GET /resource/edit
     # def edit
     #   super
@@ -28,6 +38,7 @@ module Users
     # def update
     #   super
     # end
+
 
     # DELETE /resource
     # def destroy
@@ -43,16 +54,20 @@ module Users
     #   super
     # end
 
-    # protected
+    protected
 
     # If you have extra params to permit, append them to the sanitizer.
-    # def configure_sign_up_params
-    #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-    # end
+    def configure_sign_up_params
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:image])
+    end
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_account_update_params
       devise_parameter_sanitizer.permit(:account_update, keys: [:image])
+    end
+
+    def after_update_path_for(resource)
+      edit_user_registration_path(resource)
     end
 
     # The path used after sign up.

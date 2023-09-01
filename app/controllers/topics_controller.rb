@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
 
   # GET /topics
   def index
-    @topics = Topic.includes(:user).all
+    @topics = Topic.includes(:user).all.page(params[:page]).per(6)
   end
 
   # GET /topics/1
@@ -25,25 +25,22 @@ class TopicsController < ApplicationController
   # POST /topics
   def create
     @topic = Topic.new(topic_params)
+    @topic.user = current_user
 
-    if topic_exists?
-      flash.now[:alert] = 'A similar topic already exists.'
-      render :new
+    if @topic.save
+      redirect_to topic_url(@topic), notice: t(:create_success)
     else
-      @topic.user = current_user
-      if @topic.save
-        redirect_to topic_url(@topic), notice: 'Topic was successfully created.'
-      else
-        render :new
-      end
+      flash.now[:alert] = t(:create_fail)
+      render :new
     end
   end
 
   # PATCH/PUT /topics/1
   def update
     if @topic.update(topic_params)
-      redirect_to topic_url(@topic), notice: 'Topic was successfully updated.'
+      redirect_to topic_url(@topic), notice: t(:update_success)
     else
+      flash.now[:alert] = t(:update_fail)
       render :edit
     end
   end
@@ -55,17 +52,13 @@ class TopicsController < ApplicationController
     @topic ||= Topic.includes(:user).find_by(id: params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
-  def topic_params
-    params.require(:topic).permit(:title, :description, :image)
-  end
-
   # Check if user is authorized to access the topic
   def authorize_access
     authorize @topic
   end
 
-  def topic_exists?
-    Topic.where('lower(title) ILIKE ?', "%#{topic_params[:title]}%").any?
+  # Only allow a list of trusted parameters through.
+  def topic_params
+    params.require(:topic).permit(:title, :description, :image)
   end
 end

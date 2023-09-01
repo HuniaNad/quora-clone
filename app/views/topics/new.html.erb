@@ -1,5 +1,17 @@
-<h1>New Topic</h1>
+<div class="">
+    <%= link_to "Show All Topics", topics_path, class: 'btn btn-primary px-3' %>
+</div>
 
-<%= render 'form', topic: @topic %>
-
-<%= link_to 'Back', topics_path %>
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center form-row">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header text-center font-weight-bold">New Topic</div>
+          <div class="card-body">
+            <%= render 'form', topic: @topic %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

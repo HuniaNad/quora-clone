@@ -11,17 +11,18 @@
  * It is generally better to create a new file per style scope.
  *= require material_icons
  */
+ @import url('https://fonts.googleapis.com/css2?family=PT+Serif&family=Pacifico&family=Raleway&display=swap');
  @import 'bootstrap';
  @import 'select2';
-
- [enabled] {
-    background-color: lightgreen;
-    border: 2px solid green;
-    border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-
-    &:hover {
-        transform: scale(1.05);
-      }
-  }
+ @import "font-awesome";
+ @import 'colors';
+ @import 'common';
+ @import 'flash';
+ @import 'navbar';
+ @import 'votes';
+ @import 'search';
+ @import 'topics';
+ @import 'pagination';
+ @import 'about';
+ @import 'questions';
+ 

@@ -18,6 +18,7 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-//= require question_search.js
+//= require flash.js
+//= require selectpicker.js
 
 

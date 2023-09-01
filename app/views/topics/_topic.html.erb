@@ -1,0 +1,22 @@
+<div class="col-sm-12 col-md-4">
+    <div class="card topic-card m-4">
+        <%= render partial: 'questions/card_header', locals: { entity: topic } %>
+
+        <% if topic.image&.attached? %>
+        <%= image_tag(topic.card_image, class: 'card-img-top image-preview') %>
+        <% end %>
+
+        <div class="card-body">
+        <h5 class="card-title">
+            <%= link_to topic.title.titlecase, topic %>
+        </h5>
+        <p class="card-text">
+            <%= truncate(topic.description.capitalize, length: 140) %>
+        </p>
+        </div>
+
+        <div class="card-footer text-muted">
+        <%= render partial: 'topics/following', locals: { topic: topic } %>
+        </div>
+    </div> 
+</div>

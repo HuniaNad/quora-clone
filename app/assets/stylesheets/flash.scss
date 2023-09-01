@@ -1,0 +1,51 @@
+.flash-message {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 99999;
+
+  &.show {
+    display: block;
+    animation: slideFadeIn 0.5s forwards;
+  }
+
+  @keyframes slideFadeIn {
+    0% {
+      bottom: -50px;
+      opacity: 0;
+    }
+    100% {
+      bottom: 0;
+      opacity: 1;
+    }
+  }
+
+  &.hide {
+    animation: slideFadeOut 0.5s forwards;
+  }
+
+  @keyframes slideFadeOut {
+    0% {
+      bottom: 0;
+      opacity: 1;
+    }
+    100% {
+      bottom: -50px;
+      opacity: 0;
+    }
+  }
+}
+
+.flash-notice {
+  background-color: $green;
+}
+.flash-alert {
+  background-color: $red;
+}

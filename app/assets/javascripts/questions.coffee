@@ -6,7 +6,7 @@ $(document).on 'turbolinks:load', ->
   $('.question-card').each ->
     qId = $(this).data('q-id')
     answersContainer = this.querySelector("div .answers-container")
-    if qId
+    if qId && answersContainer
       $.ajax
         type: 'GET'
         url: "/questions/#{qId}/answers"
@@ -18,7 +18,7 @@ $(document).on 'turbolinks:load', ->
             el.classList.add('text-capitalize')
 
             answerContent = document.createElement('h6')
-            answerLikes = document.createElement('p')
+            answerLikes = document.createElement('small')
             generateAnswerBody(el, answerContent, answerLikes, answer)
 
             seperator = document.createElement('hr')

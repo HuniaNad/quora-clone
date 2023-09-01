@@ -1,13 +1,15 @@
-<button 
-    class="btn btn-warning follow-button"
-    data-id="<%= topic.id %>"
-    data-type="follow"
-    <%= "enabled" if user_followed?(topic, current_user) %>
->
-    <span class="material-icons">thumb_up</span> Follow &#8226;
-    <span class="follow-count-<%= topic.id %>">
-        <%= topic_followings(topic) %>
-    </span>
-</button>
-<p class="error-msg-follow bg-danger text-light"></p>
+<div class="d-flex justify-content-center">
+    <button 
+        class="btn follow-button"
+        data-id="<%= topic.id %>"
+        data-type="follow"
+        <%= "enabled" if user_followed?(topic, current_user) %>
+    >
+        <%= icon('fa-solid', 'thumbs-up')%> Follow &#8226;
+        <span class="follow-count-<%= topic.id %>">
+            <%= topic_followings(topic) %>
+        </span>
+    </button>
+    <p class="error-msg-follow bg-danger text-light"></p>
+</div>
 

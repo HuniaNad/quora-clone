@@ -1,0 +1,14 @@
+<%= render partial: 'questions/card_header', locals: { entity: question } %>
+
+<div class="card-body">
+    <h5 class="card-title">
+        <%= link_to question.title.titlecase, question %>
+    </h5>
+    <p class="card-text">
+        <%= truncate(question.body.capitalize, length: 140) %>
+    </p>
+
+    <div class="d-flex justify-content-end">
+        <%= render partial: 'questions/voting', locals: { entity: question } %>
+    </div>
+</div>

@@ -1,26 +1,29 @@
 <%# entity: question or answer %>
-<div class="btn-group question-vote-buttons">
-    <button 
-        id="btn-upvote"
-        class="btn btn-primary btn-sm vote-button" 
-        data-vote="upvote" 
-        data-id="<%= entity.id %>" 
-        data-type="<%= format_entity_name(entity) %>" 
-        <%= "enabled" if user_upvoted?(entity, current_user) %>
-    >
-        <span class="material-icons">thumb_up</span> Upvote &#8226; 
-        <span class="likes-count-<%= entity.id %>"> <%= entity.upvotes_count %> </span>
-    </button>
+<div class="d-flex justify-content-end">
+    <div class="btn-group question-vote-buttons">
+        <button 
+            id="btn-upvote"
+            class="btn btn-sm vote-button" 
+            data-vote="upvote" 
+            data-id="<%= entity.id %>" 
+            data-type="<%= format_entity_name(entity) %>" 
+            <%= "enabled" if user_upvoted?(entity, current_user) %>
+        >
+            <%= icon('fa-solid', 'up-long')%> Upvote &#8226; 
+            <span class="likes-count-<%= entity.id %>"> <%= entity.upvotes_count %> </span>
+        </button>
 
-    <button 
-        id="btn-downvote"
-        class="btn btn-danger btn-sm vote-button" 
-        data-vote="downvote" 
-        data-id="<%= entity.id %>" 
-        data-type="<%= format_entity_name(entity) %>"
-        <%= "enabled" if user_downvoted?(entity, current_user) %>
-    >
-        <span class="material-icons">thumb_down</span>
-    </button>
+        <button 
+            id="btn-downvote"
+            class="btn btn-sm vote-button" 
+            data-vote="downvote" 
+            data-id="<%= entity.id %>" 
+            data-type="<%= format_entity_name(entity) %>"
+            <%= "enabled" if user_downvoted?(entity, current_user) %>
+        >
+            <%= icon('fa-solid', 'down-long')%>
+        </button>
+    </div>
+    <p class="error-msg-vote bg-danger text-light"></p>
+
 </div>
-<p class="error-msg-vote bg-danger text-light"></p>

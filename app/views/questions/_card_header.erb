@@ -1,0 +1,15 @@
+<div class="card-header d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+
+        <% if entity.user&.image&.attached? %>
+            <%= image_tag(entity.user.preview, class: 'circular-image display-image' ) %>
+        <% else %>
+            <%= icon('fa-solid', 'circle-user fa-2x')%>
+        <% end %>
+        <%= link_to entity.user.name, profile_path(entity.user_id), class: 'ml-2' %>
+    </div>
+
+    <%= link_to entity, data: { toggle: "tooltip", placement:"top" }, title: "Open" do %>
+        <%= icon('fa-solid', 'up-right-from-square fa-1x')%>
+    <% end %>
+</div>
