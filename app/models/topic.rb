@@ -5,7 +5,7 @@ class Topic < ApplicationRecord
   has_many :topic_followings, dependent: :destroy
   has_many :users, through: :topic_followings
   has_many :categorizations, dependent: :destroy
-  has_many :questions, through: :categorizations
+  has_many :questions, through: :categorizations, dependent: :destroy
   has_one_attached :image, dependent: :destroy
 
   validates :title, presence: true, uniqueness: true
