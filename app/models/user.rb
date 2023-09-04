@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :upvotes, dependent: :destroy
   has_many :downvotes, dependent: :destroy
   has_many :topic_followings, dependent: :destroy
-  has_many :topics, through: :topic_followings
+  has_many :topics, through: :topic_followings, dependent: :destroy
 
   validates :name, presence: true
   validates :username, presence: true

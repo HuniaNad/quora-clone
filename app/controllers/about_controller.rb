@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class AboutController < ApplicationController
-
   def followed_topics
     # followed topics - Followed Topics
     @followed_topics = Topic.joins(:topic_followings)
