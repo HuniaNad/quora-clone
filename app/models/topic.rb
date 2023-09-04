@@ -14,6 +14,6 @@ class Topic < ApplicationRecord
                     content_type: ['image/png', 'image/jpeg']
 
   def card_image
-    image.variant(resize: '400x400')
+    image.variant(resize: '400x400').processed
   end
 end
