@@ -3,7 +3,6 @@ $(document).on 'click', '#nav-profile-tab', ->
         type: 'GET'
         url: "/about"
         error: (xhr) ->
-            # $('.error-msg').text("#{xhr.status}: #{xhr.statusText}")
             console.log(xhr.statusText)
 
 $(document).on 'click', '#nav-topics-tab', ->
@@ -11,7 +10,6 @@ $(document).on 'click', '#nav-topics-tab', ->
         type: 'GET'
         url: "/about/followed_topics"
         error: (xhr) ->
-            # $('.error-msg').text("#{xhr.status}: #{xhr.statusText}")
             console.log(xhr.statusText)
 
 $(document).on 'click', '#nav-questions-tab', ->
@@ -19,7 +17,6 @@ $(document).on 'click', '#nav-questions-tab', ->
         type: 'GET'
         url: "/about/questions"
         error: (xhr) ->
-            # $('.error-msg').text("#{xhr.status}: #{xhr.statusText}")
             console.log(xhr.statusText)
 
 $(document).on 'click', '#nav-answers-tab', ->
@@ -27,6 +24,5 @@ $(document).on 'click', '#nav-answers-tab', ->
         type: 'GET'
         url: "/about/answers"
         error: (xhr) ->
-            # $('.error-msg').text("#{xhr.status}: #{xhr.statusText}")
             console.log(xhr.statusText)
  
