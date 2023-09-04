@@ -39,4 +39,5 @@ en:
   delete_fail: "Deletion failed"
   unauthorized: "You are not authorized to perform this action"
   topic_not_found: "Topic not found"
+  record_not_found: "Record not found"
   similar_topic_exists: "A similar topic already exists"

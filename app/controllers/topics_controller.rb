@@ -49,7 +49,7 @@ class TopicsController < ApplicationController
 
   # Callback to share common setup or constraints between actions.
   def topic
-    @topic ||= Topic.includes(:user).find_by(id: params[:id])
+    @topic ||= Topic.includes(:user).find(params[:id])
   end
 
   # Check if user is authorized to access the topic

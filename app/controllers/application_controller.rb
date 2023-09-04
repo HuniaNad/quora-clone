@@ -7,16 +7,22 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from ActionController::RoutingError, with: :route_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
 
   def user_not_authorized
     flash[:alert] = t(:unauthorized)
-    redirect_to(request.referer || authenticated_root_path)
+    redirect_to request.referer || authenticated_root_path
   end
 
   def route_not_found
     render 'public/404', layout: false, status: :not_found
+  end
+
+  def record_not_found
+    flash[:alert] = t(:record_not_found)
+    redirect_to authenticated_root_path
   end
 
   protected
