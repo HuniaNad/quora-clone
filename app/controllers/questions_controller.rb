@@ -62,7 +62,7 @@ class QuestionsController < ApplicationController
 
   # Callback to share common setup or constraints between actions.
   def question
-    @question ||= Question.includes(:user, :answers, :topics).find_by(id: params[:id])
+    @question ||= Question.includes(:user, :answers, :topics).find(params[:id])
   end
 
   # Check if user is authorized to access the question
