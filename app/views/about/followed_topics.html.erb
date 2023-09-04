@@ -1,0 +1,8 @@
+<%= render partial: 'tab_menu', locals: { page: 'topics' }  %>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="row d-flex justify-content-center">
+    <%= render partial: 'topics/topic', collection: @followed_topics, as: :topic  %>
+  </div>
+      <%= paginate @followed_topics %>
+</div>

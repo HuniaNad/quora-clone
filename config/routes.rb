@@ -42,5 +42,8 @@ Rails.application.routes.draw do
     end
   end
   get 'search/suggestions', to: 'search#suggestions'
-  get 'about', to: 'about#index', as: 'about'
+  get 'about', to: 'about#profile'
+  get 'about/followed_topics', to: 'about#followed_topics'
+  get 'about/questions', to: 'about#questions'
+  get 'about/answers', to: 'about#answers'
 end

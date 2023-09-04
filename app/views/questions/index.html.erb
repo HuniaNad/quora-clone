@@ -19,8 +19,6 @@
   </div>
 </div>
 
-
-
 <% @questions.each do |question| %>
     <div class="container mt-4">
       <div class="row">
@@ -47,6 +45,10 @@
         </div>
       </div>
     </div>  
+<% end %>
+
+<% if @questions.empty? %>
+  <h5 class="text-center m-5">Follow <%= link_to 'topics', topics_path %> to display relevant questions.</h5>
 <% end %>
 
 <%= paginate @questions, class:"text-center" %>

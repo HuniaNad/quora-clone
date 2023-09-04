@@ -1,0 +1,8 @@
+<%= render partial: 'tab_menu', locals: { page: 'questions' }  %>
+
+<div class="tab-content" id="nav-tabContent">
+  <%= render partial: 'questions', collection: @questions, as: :question  %>
+  <%= paginate @questions %>
+</div>
+
+  

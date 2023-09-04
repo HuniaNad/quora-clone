@@ -1,0 +1,8 @@
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <%= link_to 'Profile', about_path, class: "nav-item nav-link #{'active show' if page == 'profile'}", id: 'nav-profile-tab' %>
+    <%= link_to 'Followed Topics', about_followed_topics_path, class: "nav-item nav-link #{'active show' if page == 'topics'}", id: 'nav-topics-tab' %>
+    <%= link_to 'Questions', about_questions_path, class: "nav-item nav-link #{'active show' if page == 'questions'}", id: 'nav-questions-tab' %>
+    <%= link_to 'Answers', about_answers_path, class: "nav-item nav-link #{'active show' if page == 'answers'}", id: 'nav-answers-tab' %>
+  </div>
+</nav>
