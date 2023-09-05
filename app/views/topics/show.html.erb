@@ -21,7 +21,7 @@
     </div>
 
     <% if @topic.image&.attached? %>
-      <%= image_tag(@topic.card_image, class: 'card-img-top topics-image') %><hr>
+      <%= image_tag(@topic.preview('400x400'), class: 'card-img-top topics-image') %><hr>
     <% end %>
     <div class="card-body pt-0">
       <h5 class="card-title">

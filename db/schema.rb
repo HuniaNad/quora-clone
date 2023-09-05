@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 2023_08_30_085026) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["upvotable_type", "upvotable_id"], name: "index_upvotes_on_upvotable_type_and_upvotable_id"
-    t.index ["user_id", "upvotable_type", "upvotable_id"], name: "index_upvotes_on_user_id_and_upvotable_type_and_upvotable_id", unique: true
+    t.index ["user_id", "upvotable_type", "upvotable_id"], name: "index_upvotes_on_user_and_upvotable", unique: true
     t.index ["user_id"], name: "index_upvotes_on_user_id"
   end
 
@@ -119,16 +119,16 @@ ActiveRecord::Schema.define(version: 2023_08_30_085026) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "name", default: "", null: false
     t.string "username", default: "", null: false
     t.integer "age", default: 18, null: false
-    t.string "gender", default: "", null: false
+    t.integer "gender", default: 0, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

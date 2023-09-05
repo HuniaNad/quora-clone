@@ -2,7 +2,6 @@
 
 require 'ffaker'
 
-# frozen_string_literal: true
 # User creation
 5.times do
   user = User.new(
@@ -18,7 +17,9 @@ require 'ffaker'
     filename: 'photo.jpg'
   )
   user.save!
+  user.confirm
 end
+
 # Topic creation
 5.times do
   topic = Topic.new(
@@ -32,18 +33,20 @@ end
   )
   topic.save!
 end
+
 # Question creation with categorization
 5.times do
-  question = Question.create!(
+  question = Question.new(
     title: FFaker::Lorem.sentence,
     body: FFaker::Lorem.paragraph,
     user_id: User.pluck(:id).sample
   )
-  Categorization.create!(
-    question_id: question.id,
-    topic_id: Topic.pluck(:id).sample
-  )
+
+  question.topics << Topic.all.sample
+
+  question.save!
 end
+
 # Answers creation
 5.times do
   Answer.create!(

@@ -6,7 +6,7 @@
                 <div class="d-flex align-items-center">
 
                     <% if answer.question.user&.image&.attached? %>
-                    <%= image_tag(answer.question.user.preview, class: 'circular-image display-image' ) %>
+                    <%= image_tag(answer.question.user.preview('30x30'), class: 'circular-image display-image' ) %>
                     <% else %>
                     <%= icon('fa-solid', 'circle-user fa-2x')%>
                     <% end %>

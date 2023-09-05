@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Topic < ApplicationRecord
+  include ImagePreviewConcern
+
   belongs_to :user
   has_many :topic_followings, dependent: :destroy
   has_many :users, through: :topic_followings
@@ -13,7 +15,4 @@ class Topic < ApplicationRecord
   validates :image, attached: true,
                     content_type: ['image/png', 'image/jpeg']
 
-  def card_image
-    image.variant(resize: '400x400').processed
-  end
 end

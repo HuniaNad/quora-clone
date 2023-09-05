@@ -24,8 +24,8 @@ default: &default
 development:
   <<: *default
   database: QuoraClone_development
-  username: <%= Rails.application.credentials.database[:username] %>
-  password: <%= Rails.application.credentials.database[:password] %> 
+  username: <%= ENV['POSTGRES_DEV_USERNAME'] %>
+  password: <%= ENV['POSTGRES_DEV_PASSWORD'] %> 
 
 test:
   <<: *default

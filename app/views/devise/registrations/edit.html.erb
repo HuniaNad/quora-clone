@@ -24,7 +24,7 @@
 
               <div class="text-center mb-2">
                 <% if current_user.image&.attached? %>
-                    <%= image_tag(current_user.preview, class: 'circular-image mb-2') %>
+                    <%= image_tag(current_user.preview('150x150'), class: 'circular-image mb-2') %>
                 <% else %>
                   <%= icon('fa-solid', 'circle-user fa-5x')%>
                 <% end %>
@@ -49,7 +49,7 @@
                   <div class="form-row">
                       <div class="form-group col-md-6">
                       <%= form.label :gender, class: 'control-label' %>
-                      <%= form.select :gender, ['Male', 'Female'], { include_blank: 'Select' }, class: 'form-control', required: true %>
+                      <%= form.select :gender, populate_genders , { include_blank: 'Select' }, class: 'form-control', required: true %>
                       </div>
                       <div class="form-group col-md-6">
                       <%= form.label :age, class: 'control-label' %>

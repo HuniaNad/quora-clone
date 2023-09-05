@@ -13,7 +13,7 @@
 
   <div class="text-center mb-2">
     <% if topic.image&.attached? %>
-        <%= image_tag(topic.card_image, class: 'topics-image-preview') %>
+        <%= image_tag(topic.preview('400x400'), class: 'topics-image-preview') %>
     <% else %>
       <%= icon('fa-solid', 'panorama fa-5x')%>
     <% end %>

@@ -45,13 +45,23 @@ Follow these steps to set up the project on your local machine:
     rails db:migrate
     ```
 
-4. **Start the server:**
+4. **Check and configure the `.env.example` file:**
+
+    Before running the application, make sure to review the `.env.example` file in the project directory. You may need to copy it to a new file named `.env` and configure the environment variables according to your needs. This file typically contains settings like database credentials, mailer credentials, and secret keys.
+
+5. **Seed the database with initial data:**
+
+    ```bash
+    rails db:seed
+    ```
+
+6. **Start the server:**
 
     ```bash
     rails server
     ```
 
-5. **Access the application in your browser at http://localhost:3000.**
+7. **Access the application in your browser at http://localhost:3000.**
 
 ## Features
 

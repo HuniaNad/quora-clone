@@ -4,7 +4,6 @@ class QuestionsController < ApplicationController
   before_action :question, only: %i[show edit update destroy]
   before_action :authorize_access, only: %i[edit update destroy]
 
-  # GET /questions
   def index
     @questions = Question.includes(:user, :answers, :topics)
                          .joins(topics: :topic_followings)
@@ -14,20 +13,16 @@ class QuestionsController < ApplicationController
                          .page(params[:page]).per(10)
   end
 
-  # GET /questions/1
   def show
     @popular_answers = @question.answers.order(upvotes_count: :DESC).page(params[:page]).per(5)
   end
 
-  # GET /questions/new
   def new
     @question = Question.new
   end
 
-  # GET /questions/1/edit
   def edit; end
 
-  # POST /questions
   def create
     @question = current_user.questions.build(question_params)
     if @question.save
@@ -38,7 +33,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /questions/1
   def update
     if @question.update(question_params)
 
@@ -49,7 +43,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # DELETE /questions/1
   def destroy
     if @question.destroy
       redirect_to questions_url, notice: t(:delete_success)

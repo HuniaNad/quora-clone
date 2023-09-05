@@ -2,7 +2,7 @@
     <div class="d-flex align-items-center">
 
         <% if entity.user&.image&.attached? %>
-            <%= image_tag(entity.user.preview, class: 'circular-image display-image' ) %>
+            <%= image_tag(entity.user.preview('50x50'), class: 'circular-image display-image' ) %>
         <% else %>
             <%= icon('fa-solid', 'circle-user fa-2x')%>
         <% end %>

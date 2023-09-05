@@ -15,7 +15,7 @@
             data: {toggle: "dropdown", placement:"left"}, aria: { haspopup:"true", expanded: "false" }, 
             title: "Profile" do %>
             <% if current_user&.image.attached? %>
-                <%= image_tag(current_user.thumbnail, class: 'circlular-image display-image') %>
+                <%= image_tag(current_user.preview('30x30'), class: 'circlular-image display-image') %>
               <% else %>
                 <%= icon('fa-solid', 'circle-user fa-2x')%>
               <% end %>

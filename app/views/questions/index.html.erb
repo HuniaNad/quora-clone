@@ -3,7 +3,7 @@
     <div class="card d-flex flex-row align-items-center">
         <div>
             <% if current_user.image&.attached? %>
-                <%= image_tag(current_user.preview, class: 'circular-image display-image' ) %>
+                <%= image_tag(current_user.preview('30x30'), class: 'circular-image display-image' ) %>
             <% else %>
                 <%= icon('fa-solid', 'circle-user fa-2x')%>
             <% end %>

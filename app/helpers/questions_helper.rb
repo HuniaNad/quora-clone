@@ -2,6 +2,7 @@
 
 module QuestionsHelper
   include AboutHelper
+  
   def select_default_topic(question)
     if question.topics.length.positive?
       question.topics.pluck(:id)

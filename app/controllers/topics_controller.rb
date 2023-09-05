@@ -4,25 +4,20 @@ class TopicsController < ApplicationController
   before_action :topic, only: %i[show edit update]
   before_action :authorize_access, only: %i[edit update]
 
-  # GET /topics
   def index
     @topics = Topic.includes(:user).all.page(params[:page]).per(6)
   end
 
-  # GET /topics/1
   def show
     @associated_questions = @topic.questions.order(upvotes_count: :DESC).page(params[:page]).per(10)
   end
 
-  # GET /topics/new
   def new
     @topic = Topic.new
   end
 
-  # GET /topics/1/edit
   def edit; end
 
-  # POST /topics
   def create
     @topic = Topic.new(topic_params)
     @topic.user = current_user
@@ -35,7 +30,6 @@ class TopicsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /topics/1
   def update
     if @topic.update(topic_params)
       redirect_to topic_url(@topic), notice: t(:update_success)

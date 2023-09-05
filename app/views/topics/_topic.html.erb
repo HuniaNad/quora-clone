@@ -3,7 +3,7 @@
         <%= render partial: 'questions/card_header', locals: { entity: topic } %>
 
         <% if topic.image&.attached? %>
-        <%= image_tag(topic.card_image, class: 'card-img-top image-preview') %>
+        <%= image_tag(topic.preview('400x400'), class: 'card-img-top image-preview') %>
         <% end %>
 
         <div class="card-body">

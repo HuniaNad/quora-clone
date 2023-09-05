@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include ImagePreviewConcern
+  
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -14,17 +16,11 @@ class User < ApplicationRecord
   has_many :topic_followings, dependent: :destroy
   has_many :topics, through: :topic_followings, dependent: :destroy
 
+  enum gender: { female: 0, male: 1 }
+
   validates :name, presence: true
   validates :username, presence: true
   validates :age, presence: true, numericality: { greater_than_or_equal_to: 18 }
   validates :gender, presence: true
   validates :image, attached: true, content_type: ['image/png', 'image/jpeg']
-
-  def thumbnail
-    image.variant(resize: '30x30').processed
-  end
-
-  def preview
-    image.variant(resize: '150x150').processed
-  end
 end
