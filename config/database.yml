@@ -26,6 +26,7 @@ development:
   database: QuoraClone_development
   username: <%= ENV['POSTGRES_DEV_USERNAME'] %>
   password: <%= ENV['POSTGRES_DEV_PASSWORD'] %> 
+  host: db
 
 test:
   <<: *default
@@ -36,5 +37,7 @@ test:
 production:
   <<: *default
   database: QuoraClone_production
-  # username: QuoraClone
-  # password: <%= ENV['QUORACLONE_DATABASE_PASSWORD'] %>
+  username: <%= ENV['POSTGRES_PROD_USERNAME'] %>
+  password: <%= ENV['POSTGRES_PROD_PASSWORD'] %>
+  host: db
+  port: 5432
