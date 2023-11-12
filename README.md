@@ -14,8 +14,7 @@ To run this project, make sure you have the following dependencies installed:
 
 - Ruby v2.7.8
 - Rails v5.2.8.1
-- [Check other dependencies](https://github.com/HuniaNadeem-DevIntern/quora-clone/blob/master/Gemfile.lock)
-
+- [Check other dependencies](https://github.com/HuniaNad/quora-clone/blob/master/Gemfile.lock)
 You can install Ruby using tools like RVM or rbenv. For Rails, you can use the gem installer:
 
 ```bash
@@ -28,7 +27,7 @@ Follow these steps to set up the project on your local machine:
 1. **Clone this repository:**
 
     ```bash
-    git clone https://github.com/HuniaNadeem-DevIntern/quora-clone.git
+    git clone https://github.com/HuniaNad/quora-clone.git
     cd quora-clone
     ```
 
