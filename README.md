@@ -7,6 +7,7 @@ Welcome to the Quora Clone project! This is a web application that replicates th
 - [Dependencies](#dependencies)
 - [Getting Started](#getting-started)
 - [Features](#features)
+- [Demo Video](#demo-video)
 
 ## Dependencies
 
@@ -78,4 +79,5 @@ This Quora Clone includes the following features:
 
 - **Profile Page:** Users can view information about other users by clicking on their usernames. They can also see questions answered by a specific user.
 
-
+## Demo Video
+[Youtube Video Link](https://youtu.be/TSoHLiETk4Y)
